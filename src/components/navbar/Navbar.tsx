@@ -12,7 +12,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header className='navbar-section fixed w-full px-[4%] xl:px-[2%] bg-backgroundMain text-primaryText'>
+    <header className='navbar-section fixed w-full px-[4%] xl:px-[2%] bg-backgroundMain text-primaryText z-10'>
       <nav className='navbar-section__content relative py-3 lg:py-5 flex items-center justify-between'>
         <h1 className='navbar-section__logo text-2xl'>Cart</h1>
         <div
