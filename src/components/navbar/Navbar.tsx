@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { NavLinks } from './NavLinks';
 import { useState } from 'react';
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 export const Navbar = () => {
   const [burgerClick, setBurgerClick] = useState(false);
@@ -37,19 +37,14 @@ export const Navbar = () => {
         >
           <NavLinks />
           <div className='navbar-section__login-signup flex lg:flex-row flex-col gap-2 items-end lg:items-center'>
-            <Link
-              className='navbar-section__login opacity-100 lg:opacity-50 hover:opacity-100 transition-opacity ease-in-out duraiton-200'
-              href={'/login'}
-            >
-              Login
-            </Link>
-            <span className='hidden lg:block'>|</span>
-            <Link
-              className='navbar-section__register opacity-100 lg:opacity-50 hover:opacity-100 transition-opacity ease-in-out duraiton-200'
-              href={'/register'}
-            >
-              Register
-            </Link>
+            <SignedOut>
+              <SignInButton />
+              <span className='hidden lg:block'>|</span>
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </nav>
