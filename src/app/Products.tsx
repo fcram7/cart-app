@@ -24,7 +24,7 @@ export const Products = async () => {
         </div>
         
         <div className="products-section__see-all-products flex justify-center">
-          <Link href='/products' className='lg:text-2xl font-semibold opacity-50 hover:opacity-100 transition-opacity ease-in-out duration-200'>See all products</Link>
+          <Link href='/shop' className='lg:text-2xl font-semibold opacity-50 hover:opacity-100 transition-opacity ease-in-out duration-200'>See all products</Link>
         </div>
       </div>
     </section>
