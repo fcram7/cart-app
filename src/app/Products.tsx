@@ -3,9 +3,11 @@ import { Api } from '@/network/api/api';
 import Link from 'next/link';
 
 interface productData {
+  id: number;
   image: string;
   title: string;
   price: number;
+  description: string;
 }
 
 export const Products = async () => {
@@ -19,7 +21,7 @@ export const Products = async () => {
       <div className='products-section__content lg:px-4 mt-4'>
         <div className='products-section__products-list mt-4 gap-x-2 lg:gap-x-4 gap-y-2 grid grid-cols-2 lg:grid-cols-5 items-start justify-between mb-4'>
           {allProductsData.data.slice(0, 4).map((product: productData, index: number) => (
-            <ProductCard key={index} image={product.image} title={product.title} price={product.price} />
+            <ProductCard key={index} description={product.description} id={product.id} image={product.image} title={product.title} price={product.price} />
           ))}
         </div>
         
