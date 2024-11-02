@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Api } from '@/network/api/api';
+import { useUser } from '@clerk/nextjs';
 import { AxiosResponse } from 'axios';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
@@ -24,6 +25,8 @@ export const ProductDetail = () => {
   const [productDetail, setProductDetail] =
     useState<AxiosResponse<productDetail>>();
 
+  const { user } = useUser();
+
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
@@ -33,6 +36,7 @@ export const ProductDetail = () => {
         console.error(err);
       }
     };
+
     fetchProductDetail();
   }, [id]);
 
@@ -49,15 +53,21 @@ export const ProductDetail = () => {
         </div>
         <div className='product-detail-section__product-detail-data flex flex-col gap-4 lg:w-[50%]'>
           <h1 className='lg:text-3xl'>{productDetail?.data.title}</h1>
-          <p className='lg:text-2xl'>{productDetail?.data.price}</p>
+          <p className='lg:text-2xl'>$ {productDetail?.data.price}</p>
           <div className='flex gap-1 items-center opacity-60'>
             <Star />
             <p className='lg:text-xl'>{productDetail?.data.rating.rate}</p>
           </div>
           <p>{productDetail?.data.description}</p>
           <div className="product-detail-section__product-buttons flex gap-2">
-            <Button className='border-primaryText' variant='outline'>Add to wishlist</Button>
-            <Button>Add to cart</Button>
+            {user ? (
+              <>
+                <Button className='border-primaryText' variant='outline'>Add to wishlist</Button>
+                <Button>Add to cart</Button>
+              </>
+            ) : (
+              <p className='lg:text-xl font-medium'>Please sign in to shop</p>
+            )}
           </div>
         </div>
       </div>

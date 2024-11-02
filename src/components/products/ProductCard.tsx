@@ -10,6 +10,7 @@ import {
 } from '../ui/card';
 import Link from 'next/link';
 import { ProductCardDialog } from './ProductCardDialog';
+import { currentUser } from '@clerk/nextjs/server';
 
 interface productCard {
   id: number;
@@ -19,7 +20,8 @@ interface productCard {
   description?: string;
 }
 
-export const ProductCard = ({ id, image, title, price, description }: productCard) => {
+export const ProductCard = async ({ id, image, title, price, description }: productCard) => {
+  const user = await currentUser()
   return (
     <article className='product-card w-full overflow-hidden'>
       <Card className=''>
@@ -36,8 +38,14 @@ export const ProductCard = ({ id, image, title, price, description }: productCar
         </CardContent>
         {/* <CardFooter className='flex flex-col lg:flex-row items-start lg:items-center justify-start gap-2 '> */}
         <CardFooter className='flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-2 px-3 pb-3 pt-0'>
-          <Button variant='outline' className='border-primaryText'>Wishlist</Button>
-          <ProductCardDialog image={image} title={title} price={price} description={description} />
+          {user ? (
+            <>
+              <Button variant='outline' className='border-primaryText'>Wishlist</Button>
+              <ProductCardDialog image={image} title={title} price={price} description={description} />
+            </>
+          ) : (
+            <p className='lg:text-lg font-medium'>Please sign in to shop</p>
+          )}
         </CardFooter>
       </Card>
     </article>
