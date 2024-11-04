@@ -43,7 +43,11 @@ export const Navbar = () => {
               <SignUpButton />
             </SignedOut>
             <SignedIn>
-              <UserButton />
+              <UserButton showName appearance={{
+                variables: {
+                  fontSize: '1rem',
+                }
+              }} />
             </SignedIn>
           </div>
         </div>
