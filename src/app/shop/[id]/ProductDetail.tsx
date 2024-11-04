@@ -1,5 +1,6 @@
 'use client';
 
+import { ProductCardDialog } from '@/components/products/ProductCardDialog';
 import { Button } from '@/components/ui/button';
 import { Api } from '@/network/api/api';
 import { useUser } from '@clerk/nextjs';
@@ -59,11 +60,20 @@ export const ProductDetail = () => {
             <p className='lg:text-xl'>{productDetail?.data.rating.rate}</p>
           </div>
           <p>{productDetail?.data.description}</p>
-          <div className="product-detail-section__product-buttons flex gap-2">
+          <div className='product-detail-section__product-buttons flex gap-2'>
             {user ? (
               <>
-                <Button className='border-primaryText' variant='outline'>Add to wishlist</Button>
-                <Button>Add to cart</Button>
+                <Button className='border-primaryText' variant='outline'>
+                  Add to wishlist
+                </Button>
+                {productDetail && (
+                  <ProductCardDialog
+                    title={productDetail.data.title}
+                    price={productDetail.data.price}
+                    image={productDetail.data.image}
+                    description={productDetail?.data.description}
+                  />
+                )}
               </>
             ) : (
               <p className='lg:text-xl font-medium'>Please sign in to shop</p>
