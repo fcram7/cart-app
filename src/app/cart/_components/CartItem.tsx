@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
-export const CartCard = () => {
+export const CartItem = () => {
   return (
     <Card className='w-full h-full flex items-center justify-between'>
       {/* <p>Image</p> */}
