@@ -47,7 +47,7 @@ export const Cart = () => {
   };
 
   return (
-    <section className='cart-section px-[4%] lg:px-[2%] py-40 lg:min-h-[580px]'>
+    <section className='cart-section px-[4%] lg:px-[2%] py-40 lg:min-h-[590px]'>
       <div className='flex items-center justify-between'>
         <h1 className='text-2xl lg:text-4xl font-semibold cart-section__section-title'>
           Your Cart
