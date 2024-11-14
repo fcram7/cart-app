@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { cartStore } from '@/utils/states/cart';
-import { CartItem } from './_components/CartItem';
+import { CartItem } from '@/components/cart/CartItem';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
