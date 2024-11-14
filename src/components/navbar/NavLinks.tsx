@@ -5,7 +5,7 @@ export const NavLinks = () => {
     <ul className='nav-links flex lg:flex-row flex-col gap-2 lg:gap-6 items-end lg:items-center justify-center'>
       <NavLinkMenu href='/' menu='Home' />
       <NavLinkMenu href='/shop' menu='Shop' />
-      <NavLinkMenu href='#' menu='About' />
+      <NavLinkMenu href='/cart' menu='Cart' />
     </ul>
   )
 }
