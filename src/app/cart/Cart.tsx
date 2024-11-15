@@ -94,7 +94,7 @@ export const Cart = () => {
 
         {cartItem.length > 0 ? (
           <div className='cart-section__checkout flex items-center justify-end mt-4 px-6'>
-            <Button className='lg:text-xl w-52 h-14'>
+            <Button className='lg:text-xl w-52 h-14' onClick={() => router.push('/checkout')}>
               <ShoppingCart />
               Checkout
             </Button>
