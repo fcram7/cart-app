@@ -28,12 +28,12 @@ export const Shipping = () => {
     {
       label: 'Regular',
       duration: 3,
-      value: '7',
+      value: '15000',
     },
     {
       label: 'Express',
       duration: 1,
-      value: '12',
+      value: '25000',
     },
   ];
   return (
@@ -73,7 +73,7 @@ export const Shipping = () => {
                         <p className='font-semibold'>{option.label}</p>
                         <p className='opacity-50'>{option.duration} day(s) of shipping</p>
                       </div>
-                      <p className='opacity-80'>$ {option.value}</p>
+                      <p className='opacity-80'>Rp {option.value}</p>
                     </div>
                     <Check
                       className={cn(

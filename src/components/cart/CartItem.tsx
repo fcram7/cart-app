@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { rupiah } from '@/utils/priceConverter/priceConverter';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { MouseEventHandler } from 'react';
@@ -42,12 +43,12 @@ export const CartItem = ({
         />
         <div className='card__header-text grid gap-3'>
           <CardTitle>{title}</CardTitle>
-          <p className='opacity-60'>$ {price}</p>
+          <p className='opacity-60'>{rupiah(price * 15000)}</p>
         </div>
       </CardHeader>
       <CardContent className='mt-4'>
         <p>Qty: {itemAmount}</p>
-        <p>Total: $ {total}</p>
+        <p>Total: {rupiah(total * 15000)}</p>
       </CardContent>
       {pathname === '/checkout' ? null : (
         <CardFooter className='mt-6'>

@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { ProductCardDialog } from './ProductCardDialog';
 import { currentUser } from '@clerk/nextjs/server';
+import { rupiah } from '@/utils/priceConverter/priceConverter';
 
 interface productCard {
   id: number;
@@ -48,7 +49,7 @@ export const ProductCard = async ({
               {title}
             </Link>
           </CardTitle>
-          <CardDescription>$ {price}</CardDescription>
+          <CardDescription>{rupiah(price * 15000)}</CardDescription>
         </CardContent>
         {/* <CardFooter className='flex flex-col lg:flex-row items-start lg:items-center justify-start gap-2 '> */}
         <CardFooter className='flex flex-col lg:flex-row items-start lg:items-center justify-start lg:justify-center gap-2 px-3 pb-3 pt-0'>

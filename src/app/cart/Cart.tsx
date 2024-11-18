@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
+import { rupiah } from '@/utils/priceConverter/priceConverter';
 
 export const Cart = () => {
   const router = useRouter();
@@ -89,7 +90,7 @@ export const Cart = () => {
 
         <div className='cart-section__total flex items-center justify-end gap-6 mt-6 px-6'>
           <p className='lg:text-2xl'>Total:</p>
-          <p className='lg:text-4xl'>$ {Math.round(total * 100) / 100}</p>
+          <p className='lg:text-4xl'>{rupiah(total)}</p>
         </div>
 
         {cartItem.length > 0 ? (
