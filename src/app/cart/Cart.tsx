@@ -7,10 +7,13 @@ import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
+import { rupiah } from '@/utils/priceConverter/priceConverter';
+import { checkoutStore } from '@/utils/states/checkout';
 
 export const Cart = () => {
   const router = useRouter();
   const { cartItem, total, reset, removeCartItem, reduceTotal } = cartStore();
+  const { setTransactionId } = checkoutStore();
   const { toast } = useToast();
 
   const removeItemHandler = (
@@ -24,7 +27,7 @@ export const Cart = () => {
 
     toast({
       title: 'Item removed',
-      description: `Item ${title} removed from cart`
+      description: `Item ${title} removed from cart`,
     });
   };
 
@@ -89,12 +92,18 @@ export const Cart = () => {
 
         <div className='cart-section__total flex items-center justify-end gap-6 mt-6 px-6'>
           <p className='lg:text-2xl'>Total:</p>
-          <p className='lg:text-4xl'>$ {Math.round(total * 100) / 100}</p>
+          <p className='lg:text-4xl'>{rupiah(total)}</p>
         </div>
 
         {cartItem.length > 0 ? (
           <div className='cart-section__checkout flex items-center justify-end mt-4 px-6'>
-            <Button className='lg:text-xl w-52 h-14'>
+            <Button
+              className='lg:text-xl w-52 h-14'
+              onClick={() => {
+                setTransactionId((~~((Math.random() * 100) + 1)).toString());
+                router.push('/checkout');
+              }}
+            >
               <ShoppingCart />
               Checkout
             </Button>

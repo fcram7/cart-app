@@ -32,7 +32,7 @@ const initialState: cart = {
 export const cartStore = create<cart & cartAction>((set) => ({
   ...initialState,
   // setItemAmount: (itemAmount) => set(() => ({ itemAmount: itemAmount })),
-  setTotal: (total) => set((state) => ({ total: state.total + total })),
+  setTotal: (total) => set((state) => ({ total: (state.total + total) * 15000 })),
   setCartItem: (newCartItem) => set((state) => ({
     cartItem: [
       ...state.cartItem,
@@ -44,7 +44,7 @@ export const cartStore = create<cart & cartAction>((set) => ({
       ...state.cartItem.filter(item => item.id !== id)
     ]
   })),
-  reduceTotal: (total) => set((state) => ({ total: Math.max((state.total -= total), 0) })),
+  reduceTotal: (total) => set((state) => ({ total: (Math.max((state.total -= total), 0)) * 15000 })),
   reset: () => {
     set(initialState)
   }

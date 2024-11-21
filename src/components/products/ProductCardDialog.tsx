@@ -17,6 +17,7 @@ import { cartStore } from '@/utils/states/cart';
 import { useToast } from '@/hooks/use-toast';
 import { ToastAction } from '../ui/toast';
 import { useRouter } from 'next/navigation';
+import { rupiah } from '@/utils/priceConverter/priceConverter';
 
 interface productCard {
   id: number;
@@ -90,7 +91,7 @@ export const ProductCardDialog = ({
             />
             <div className='product-card__selected-product-description grid gap-3'>
               <h3 className='text-xl xl:text-2xl'>{title}</h3>
-              <p className='opacity-80'>$ {price}</p>
+              <p className='opacity-80'>{rupiah(price)}</p>
               <p className='text-xs'>{description}</p>
             </div>
           </div>
