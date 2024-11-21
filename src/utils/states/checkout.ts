@@ -22,6 +22,6 @@ export const checkoutStore = create<checkout & checkoutAction>((set) => ({
   ...initialState,
   setTransactionId: (transactionId) =>
     set(() => ({ transactionId: transactionId })),
-  setItemTotal: (itemTotal) => set(() => ({ itemTotal: itemTotal })),
+  setItemTotal: (itemTotal) => set(() => ({ itemTotal: itemTotal * 15000 })),
   setCheckoutTotal: (checkoutTotal) => set(() => ({ checkoutTotal: checkoutTotal })),
 }));

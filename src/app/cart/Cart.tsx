@@ -8,10 +8,12 @@ import { ToastAction } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
 import { ShoppingCart } from 'lucide-react';
 import { rupiah } from '@/utils/priceConverter/priceConverter';
+import { checkoutStore } from '@/utils/states/checkout';
 
 export const Cart = () => {
   const router = useRouter();
   const { cartItem, total, reset, removeCartItem, reduceTotal } = cartStore();
+  const { setTransactionId } = checkoutStore();
   const { toast } = useToast();
 
   const removeItemHandler = (
@@ -25,7 +27,7 @@ export const Cart = () => {
 
     toast({
       title: 'Item removed',
-      description: `Item ${title} removed from cart`
+      description: `Item ${title} removed from cart`,
     });
   };
 
@@ -95,7 +97,13 @@ export const Cart = () => {
 
         {cartItem.length > 0 ? (
           <div className='cart-section__checkout flex items-center justify-end mt-4 px-6'>
-            <Button className='lg:text-xl w-52 h-14' onClick={() => router.push('/checkout')}>
+            <Button
+              className='lg:text-xl w-52 h-14'
+              onClick={() => {
+                setTransactionId((~~((Math.random() * 100) + 1)).toString());
+                router.push('/checkout');
+              }}
+            >
               <ShoppingCart />
               Checkout
             </Button>

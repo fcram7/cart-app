@@ -4,11 +4,40 @@ import { Button } from '@/components/ui/button';
 import { rupiah } from '@/utils/priceConverter/priceConverter';
 import { cartStore } from '@/utils/states/cart';
 import { checkoutStore } from '@/utils/states/checkout';
+import axios from 'axios';
 import { WalletCards } from 'lucide-react';
+import { useEffect } from 'react';
 
 export const CheckoutTotal = () => {
   const { total } = cartStore();
-  const { checkoutTotal } = checkoutStore();
+  const { checkoutTotal, transactionId } = checkoutStore();
+
+  useEffect(() => {
+    const snapScript = 'https://app.sandbox.midtrans.com/snap/snap.js';
+    const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT;
+    const script = document.createElement('script');
+    script.src = snapScript;
+    script.setAttribute('data-client-key', clientKey!);
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const payHandler = async () => {
+    const data = {
+      transactionId: transactionId,
+      checkoutTotal: checkoutTotal,
+    };
+    const response = await axios.post('/api/tokenizer', data);
+
+    console.log(response.data);
+
+    window.snap.pay(response.data.token);
+  };
   return (
     <div className='px-10 mt-6'>
       <div className='flex items-center justify-between lg:text-xl'>
@@ -20,7 +49,9 @@ export const CheckoutTotal = () => {
         <p>{rupiah(checkoutTotal)}</p>
       </div>
       <div className='flex items-center justify-end mt-6 w-full'>
-        <Button className='w-full lg:w-[10%]'><WalletCards /> Pay</Button>
+        <Button className='w-full lg:w-[10%]' onClick={payHandler}>
+          <WalletCards /> Pay
+        </Button>
       </div>
     </div>
   );
