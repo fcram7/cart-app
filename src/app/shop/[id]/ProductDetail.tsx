@@ -11,6 +11,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface productDetail {
+  id: number;
   title: string;
   price: number;
   description: string;
@@ -68,6 +69,7 @@ export const ProductDetail = () => {
                 </Button>
                 {productDetail && (
                   <ProductCardDialog
+                    id={productDetail.data.id}
                     title={productDetail.data.title}
                     price={productDetail.data.price}
                     image={productDetail.data.image}
