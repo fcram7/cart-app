@@ -8,15 +8,15 @@ const snap = new MidtransClient.Snap({
 });
 
 export const POST = async (request: NextRequest) => {
-  const { transactionId, checkoutTotal } = await request.json();
+  const { id, total } = await request.json();
 
   const parameter = {
     transaction_details: {
-      order_id: transactionId,
-      gross_amount: checkoutTotal,
+      order_id: id,
+      gross_amount: total,
     },
   };
 
-  const token = snap.createTransactionToken(parameter);
+  const token = await snap.createTransactionToken(parameter);
   return NextResponse.json({ token });
 };

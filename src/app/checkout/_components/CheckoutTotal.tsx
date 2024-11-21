@@ -29,12 +29,10 @@ export const CheckoutTotal = () => {
 
   const payHandler = async () => {
     const data = {
-      transactionId: transactionId,
-      checkoutTotal: checkoutTotal,
+      id: transactionId,
+      total: checkoutTotal,
     };
     const response = await axios.post('/api/tokenizer', data);
-
-    console.log(response.data);
     // @ts-expect-error midtrans snap payment
     window.snap.pay(response.data.token);
   };
