@@ -91,7 +91,7 @@ export const ProductCardDialog = ({
             />
             <div className='product-card__selected-product-description grid gap-3'>
               <h3 className='text-xl xl:text-2xl'>{title}</h3>
-              <p className='opacity-80'>{rupiah(price)}</p>
+              <p className='opacity-80'>{rupiah(price * 15000)}</p>
               <p className='text-xs'>{description}</p>
             </div>
           </div>
